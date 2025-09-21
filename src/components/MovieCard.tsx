@@ -46,12 +46,12 @@ export default function MovieCard({ movie, onEdit, onDelete }: MovieCardProps) {
         </div>
 
         {/* Action Buttons */}
-        <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+        <div className="absolute top-2 right-2 flex space-x-1 z-10">
           <Button
             size="sm"
             variant="secondary"
             onClick={() => onEdit(movie)}
-            className="bg-blue-600 hover:bg-blue-700 text-white p-2"
+            className="bg-blue-600 hover:bg-blue-700 text-white p-2 cursor-pointer"
           >
             <Edit className="w-3 h-3" />
           </Button>
@@ -59,7 +59,7 @@ export default function MovieCard({ movie, onEdit, onDelete }: MovieCardProps) {
             size="sm"
             variant="destructive"
             onClick={() => onDelete(movie.id)}
-            className="bg-red-600 hover:bg-red-700 text-white p-2"
+            className="bg-red-600 hover:bg-red-700 text-white p-2 cursor-pointer"
           >
             <Trash2 className="w-3 h-3" />
           </Button>

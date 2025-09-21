@@ -14,7 +14,7 @@ WebTV is a modern web application for managing your movie collection. This appli
 
 ## Deployment Website
 
-_[https://movies-webtv.vercel.app/]_
+https://movies-webtv.vercel.app/
 
 ## Features
 
@@ -133,31 +133,29 @@ npm start
 
 <h2 align="center">1. Movies List Page</h2>
 <p align="center">
-    <img width="700" src="src/assets/images/readme/listMovies.png" />
+    <img width="500" src="src/assets/images/readme/listMovies.png" />
 </p>
 <h2 align="center">2. Add Movie Form</h2>
 <p align="center">
-    <img width="700" src="src/assets/images/readme/addMovie.png"/>
+    <img width="500" src="src/assets/images/readme/addMovie.png"/>
 </p>
 <h2 align="center">3. Search Functionality</h2>
 <p align="center">
-    <img width="700" src="src/assets/images/readme/searchMovie.png" />
+    <img width="500" src="src/assets/images/readme/searchMovie.png" />
 </p>
 <h2 align="center">4. Edit Movie</h2>
 <p align="center">
-    <img width="700" src="src/assets/images/readme/editMovie.png"/>
+    <img width="500" src="src/assets/images/readme/editMovie.png"/>
 </p>
 <h2 align="center">5. Delete Confirmation</h2>
 <p align="center">
-    <img width="700" src="src/assets/images/readme/deleteMovie.png"/>
+    <img width="500" src="src/assets/images/readme/deleteMovie.png"/>
 </p>
 <h2 align="center">6. Responsive Mobile View</h2>
 <p align="center">
-    <img width="300" src="src/assets/images/readme/mobile-view-1.png" />
+    <img width="250" src="src/assets/images/readme/mobile-view-1.png" />
+    <img width="250" src="src/assets/images/readme/mobile-view-2.png"/>
 </p>
 <p align="center">
-    <img width="300" src="src/assets/images/readme/mobile-view-2.png"/>
-</p>
-<p align="center">
-    <img width="300" src="src/assets/images/readme/mobile-view-3.png"/>
+    <img width="250" src="src/assets/images/readme/mobile-view-3.png"/>
 </p>

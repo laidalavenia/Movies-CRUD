@@ -2,11 +2,11 @@
    <h2 align="center">WebTV Movies CRUD</h2>
 </p>
 
-<p align="center">
+<!-- <p align="center">
     <a href="https://github.com/laidalavenia/Movies-CRUD/issues"><img src="https://img.shields.io/github/issues/laidalavenia/Movies-CRUD" alt="GitHub issues"></a>
     <a href="https://github.com/laidalavenia/Movies-CRUD"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/laidalavenia/Movies-CRUD"></a>
     <a href="https://github.com/laidalavenia/Movies-CRUD/pulls"><img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/laidalavenia/Movies-CRUD"></a>
-</p>
+</p> -->
 
 ## WebTV Movies CRUD
 
@@ -14,7 +14,7 @@ WebTV is a modern web application for managing your movie collection. This appli
 
 ## Deployment Website
 
-*[https://movies-webtv.vercel.app/]*
+_[https://movies-webtv.vercel.app/]_
 
 ## Features
 
@@ -31,7 +31,7 @@ This website was developed using modern tech stack:
 
 - **React** - JavaScript library for building user interfaces
 - **Next.js** - React framework for production-ready applications
-- **shadcn/ui** - Modern UI component library 
+- **shadcn/ui** - Modern UI component library
 - **Tailwind CSS** - Utility-first CSS framework for styling
 - **TypeScript** - Type-safe JavaScript development
 
@@ -51,15 +51,15 @@ MOVIES-CRUD/
 │   ├── assets/images/readme/      # Documentation images
 │   ├── components/
 │   │   ├── ui/                    # shadcn/ui components
-│   │   │   ├── badge.tsx          
-│   │   │   ├── button.tsx         
-│   │   │   ├── card.tsx           
-│   │   │   ├── dialog.tsx        
-│   │   │   ├── input.tsx          
-│   │   │   ├── select.tsx         
-│   │   │   └── textarea.tsx       
-│   │   ├── MovieCard.tsx          
-│   │   └── Navbar.tsx             
+│   │   │   ├── badge.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── select.tsx
+│   │   │   └── textarea.tsx
+│   │   ├── MovieCard.tsx
+│   │   └── Navbar.tsx
 │   ├── lib/
 │   │   └── utils.ts               # Utility functions
 │   ├── pages/movies/components/
@@ -132,57 +132,32 @@ npm start
 ## Website Views
 
 <h2 align="center">1. Movies List Page</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/listMovies.png" />
+    <img width="700" src="src/assets/images/readme/listMovies.png" />
 </p>
-
 <h2 align="center">2. Add Movie Form</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/addMovie.png"/>
+    <img width="700" src="src/assets/images/readme/addMovie.png"/>
 </p>
-
 <h2 align="center">3. Search Functionality</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/searchMovie.png" />
+    <img width="700" src="src/assets/images/readme/searchMovie.png" />
 </p>
-
 <h2 align="center">4. Edit Movie</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/editMovie.png"/>
+    <img width="700" src="src/assets/images/readme/editMovie.png"/>
 </p>
-
 <h2 align="center">5. Delete Confirmation</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/deleteMovie.png"/>
+    <img width="700" src="src/assets/images/readme/deleteMovie.png"/>
 </p>
-
 <h2 align="center">6. Responsive Mobile View</h2>
-
 <p align="center">
-    <img src="src/assets/images/readme/mobile-view-1.png" />
+    <img width="300" src="src/assets/images/readme/mobile-view-1.png" />
 </p>
-
 <p align="center">
-    <img src="src/assets/images/readme/mobile-view-2.png"/>
+    <img width="300" src="src/assets/images/readme/mobile-view-2.png"/>
 </p>
-
 <p align="center">
-    <img src="src/assets/images/readme/mobile-view-3.png"/>
+    <img width="300" src="src/assets/images/readme/mobile-view-3.png"/>
 </p>
-
-## Contributing
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).

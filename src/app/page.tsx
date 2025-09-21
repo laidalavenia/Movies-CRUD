@@ -1,103 +1,148 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import Navbar from "@/components/Navbar";
+import MovieCard from "@/components/MovieCard";
+import MovieForm from "@/pages/movies/components/MovieForm";
+import { Movie } from "@/types/movie";
+import {
+  getMovies,
+  addMovie,
+  updateMovie,
+  deleteMovie,
+} from "@/utils/localStorage";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingMovie, setEditingMovie] = useState<Movie | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Load movies on component mount
+  useEffect(() => {
+    const loadedMovies = getMovies();
+    setMovies(loadedMovies);
+    setFilteredMovies(loadedMovies);
+  }, []);
+
+  // Filter movies based on search term
+  useEffect(() => {
+    const filtered = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+  }, [movies, searchTerm]);
+
+  const handleAddMovie = () => {
+    setEditingMovie(null);
+    setIsFormOpen(true);
+  };
+
+  const handleEditMovie = (movie: Movie) => {
+    setEditingMovie(movie);
+    setIsFormOpen(true);
+  };
+
+  const handleDeleteMovie = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this movie?")) {
+      const success = deleteMovie(id);
+      if (success) {
+        const updatedMovies = getMovies();
+        setMovies(updatedMovies);
+      }
+    }
+  };
+
+  const handleFormSubmit = (
+    movieData: Omit<Movie, "id" | "createdAt" | "updatedAt">
+  ) => {
+    if (editingMovie) {
+      // Update existing movie
+      const updatedMovie = updateMovie(editingMovie.id, movieData);
+      if (updatedMovie) {
+        const updatedMovies = getMovies();
+        setMovies(updatedMovies);
+      }
+    } else {
+      // Add new movie
+      addMovie(movieData);
+      const updatedMovies = getMovies();
+      setMovies(updatedMovies);
+    }
+    setIsFormOpen(false);
+    setEditingMovie(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      {/* Navbar */}
+      <Navbar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        onAddMovie={handleAddMovie}
+      />
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-white text-2xl font-bold mb-2">
+            {searchTerm
+              ? `Search Results for "${searchTerm}"`
+              : "Newest & Recommend"}
+          </h1>
+          <p className="text-gray-400">
+            {filteredMovies.length} movie
+            {filteredMovies.length !== 1 ? "s" : ""} found
+          </p>
         </div>
+
+        {/* Movies Grid */}
+        {filteredMovies.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            {filteredMovies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onEdit={handleEditMovie}
+                onDelete={handleDeleteMovie}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">🎬</div>
+            <h3 className="text-white text-xl font-bold mb-2">
+              {searchTerm ? "No movies found" : "No movies yet"}
+            </h3>
+            <p className="text-gray-400 mb-4">
+              {searchTerm
+                ? `No movies match your search for "${searchTerm}"`
+                : "Start by adding your first movie"}
+            </p>
+            {!searchTerm && (
+              <button
+                onClick={handleAddMovie}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors"
+              >
+                Add Your First Movie
+              </button>
+            )}
+          </div>
+        )}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Movie Form Modal */}
+      <MovieForm
+        isOpen={isFormOpen}
+        onClose={() => {
+          setIsFormOpen(false);
+          setEditingMovie(null);
+        }}
+        onSubmit={handleFormSubmit}
+        editMovie={editingMovie}
+      />
     </div>
   );
 }
